@@ -62,9 +62,19 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
     <h3>Cave Rat King voice</h3>
     <p class="why">Three takes of one line, sent earlier. Local Chatterbox, level-matched. Your pick voices his ~33 scripted lines.</p>
     <div class="audio">
-      <p>A, pompous<br><audio controls preload="none" src="audio/rat_A.mp3"></audio></p>
-      <p>B, most rodent<br><audio controls preload="none" src="audio/rat_B.mp3"></audio></p>
-      <p>C, theatrical tyrant<br><audio controls preload="none" src="audio/rat_C.mp3"></audio></p>
+      <p><b>A, pompous</b><br>
+        <audio controls preload="auto" playsinline><source src="audio/rat_A.m4a" type="audio/mp4"><source src="audio/rat_A.mp3" type="audio/mpeg"><source src="audio/rat_A.wav" type="audio/wav"></audio><br>
+        <button type="button" class="wa" data-k="A" style="font-size:1.3em;padding:.5em 1em;margin:.3em 0">&#9654; Play A (alt method)</button>
+        <a href="audio/rat_A.mp3">mp3</a> &middot; <a href="audio/rat_A.m4a">m4a</a> &middot; <a href="audio/rat_A.wav">wav</a></p>
+      <p><b>B, most rodent</b><br>
+        <audio controls preload="auto" playsinline><source src="audio/rat_B.m4a" type="audio/mp4"><source src="audio/rat_B.mp3" type="audio/mpeg"><source src="audio/rat_B.wav" type="audio/wav"></audio><br>
+        <button type="button" class="wa" data-k="B" style="font-size:1.3em;padding:.5em 1em;margin:.3em 0">&#9654; Play B (alt method)</button>
+        <a href="audio/rat_B.mp3">mp3</a> &middot; <a href="audio/rat_B.m4a">m4a</a> &middot; <a href="audio/rat_B.wav">wav</a></p>
+      <p><b>C, theatrical tyrant</b><br>
+        <audio controls preload="auto" playsinline><source src="audio/rat_C.m4a" type="audio/mp4"><source src="audio/rat_C.mp3" type="audio/mpeg"><source src="audio/rat_C.wav" type="audio/wav"></audio><br>
+        <button type="button" class="wa" data-k="C" style="font-size:1.3em;padding:.5em 1em;margin:.3em 0">&#9654; Play C (alt method)</button>
+        <a href="audio/rat_C.mp3">mp3</a> &middot; <a href="audio/rat_C.m4a">m4a</a> &middot; <a href="audio/rat_C.wav">wav</a></p>
+      <p id="wastat" style="font-size:.9em;opacity:.7"></p>
     </div>
     <div class="opts">
       <label><input type="radio" name="rat" id="rat-a" value="A (pompous, mildly squeaky)">A, pompous</label>
