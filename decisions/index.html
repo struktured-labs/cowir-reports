@@ -1,0 +1,327 @@
+<title>Cowir Open Calls</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one column of decision cards grouped by topic; quick picks first, a sticky tally + copy button at the bottom. */
+:root{
+  --bg:#eef1ec; --surface:#ffffff; --fg:#1d2420; --muted:#5a665f; --rule:#d3dad4;
+  --accent:#b8860b; --accent-ink:#5c4300; --accent-soft:#f6ecd2; --pick:#2f6b4f; --pick-soft:#e2f0e8;
+  --display:"Pixelify Sans",ui-monospace,monospace;
+  --body:"Source Sans 3",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141a17; --surface:#1c2420; --fg:#e3e9e5; --muted:#9aa8a0; --rule:#2e3a34;
+  --accent:#e0b84a; --accent-ink:#f3dc9a; --accent-soft:#3a3119; --pick:#7cc9a3; --pick-soft:#1f3a2e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141a17; --surface:#1c2420; --fg:#e3e9e5; --muted:#9aa8a0; --rule:#2e3a34;
+  --accent:#e0b84a; --accent-ink:#f3dc9a; --accent-soft:#3a3119; --pick:#7cc9a3; --pick-soft:#1f3a2e; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:17px/1.55 var(--body);margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:760px;margin:0 auto;padding-block:36px 120px;display:flex;flex-direction:column;gap:32px}
+h1,h2{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance;letter-spacing:.01em}
+h1{font-size:2rem;line-height:1.15}
+h2{font-size:1.2rem;color:var(--accent-ink);padding-bottom:6px;border-bottom:2px solid var(--accent)}
+p{margin:0}
+.lede{color:var(--muted);max-width:62ch}
+section{display:flex;flex-direction:column;gap:14px;min-width:0}
+.q{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.q h3{margin:0;font-size:1.05rem;font-weight:700;text-wrap:balance}
+.q .why{color:var(--muted);font-size:.95rem}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts label{display:flex;align-items:center;gap:8px;border:1px solid var(--rule);border-radius:4px;padding:7px 12px;cursor:pointer;font-size:.95rem;background:var(--bg)}
+.opts input{accent-color:var(--pick);margin:0}
+.opts label:has(input:checked){border-color:var(--pick);background:var(--pick-soft);font-weight:600}
+.opts label:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.rec{font-family:var(--mono);font-size:.72rem;color:var(--accent-ink);background:var(--accent-soft);padding:1px 6px;border-radius:3px;margin-left:2px}
+.src{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+a{color:var(--pick)}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--rule);
+  padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.bar .in{max-width:760px;margin:0 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.tally{font-family:var(--mono);font-size:.9rem;font-variant-numeric:tabular-nums}
+button{font:600 .95rem var(--body);background:var(--pick);color:var(--surface);border:0;border-radius:4px;padding:9px 16px;cursor:pointer}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#out{flex-basis:100%;font-family:var(--mono);font-size:.8rem;width:100%;min-height:0;background:var(--bg);color:var(--fg);border:1px solid var(--rule);border-radius:4px;padding:8px}
+.note{font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:10px">
+  <h1>Open calls for Cowardly Irregular</h1>
+  <p class="lede">Everything the lanes are waiting on you for, as of 31 Oct (game at v3.33.750, .751 in its gate). Tap your picks, then press <b>Copy my answers</b> and paste them to me. Skip anything; a skipped call keeps the current default. <span class="rec">rec</span> marks my recommendation.</p>
+</header>
+
+<section>
+  <h2>Quick picks: hear or see, then choose</h2>
+
+  <div class="q" data-q="Rat King voice">
+    <h3>Cave Rat King voice</h3>
+    <p class="why">Three takes of one line, sent earlier. Local Chatterbox, level-matched. Your pick voices his ~33 scripted lines.</p>
+    <div class="opts">
+      <label><input type="radio" name="rat" id="rat-a" value="A (pompous, mildly squeaky)">A, pompous</label>
+      <label><input type="radio" name="rat" id="rat-b" value="B (most rodent)">B, most rodent</label>
+      <label><input type="radio" name="rat" id="rat-c" value="C (fussy theatrical tyrant)">C, theatrical tyrant</label>
+      <label><input type="radio" name="rat" id="rat-n" value="none of these, try again">None, try again</label>
+    </div>
+    <p class="src">cowir-sfx · tmp/ratking_review/</p>
+  </div>
+
+  <div class="q" data-q="Live voice for AI lines">
+    <h3>Voice his AI-written taunts and last words live too?</h3>
+    <p class="why">Desktop only, about 2 s per line on your 3090, no API key. Web players still hear the recorded lines.</p>
+    <div class="opts">
+      <label><input type="radio" name="live" id="live-y" value="yes, after the recorded lines">Yes, after the recorded ones <span class="rec">rec</span></label>
+      <label><input type="radio" name="live" id="live-n" value="no, recorded lines only">No, recorded only</label>
+    </div>
+  </div>
+
+  <div class="q" data-q="Soundscape level">
+    <h3>Village soundscape level (Harmonia, Eldertree)</h3>
+    <p class="why">Four clips sent earlier. It ships at "proposed" until you pick. Also: what's missing? (carts, laughter, a bell, dogs, owls aren't made yet)</p>
+    <div class="opts">
+      <label><input type="radio" name="amb" id="amb-1" value="today (~26 LU under, near silent)">Today, ~26 LU under</label>
+      <label><input type="radio" name="amb" id="amb-2" value="proposed (21 LU under)">Proposed, 21 LU under <span class="rec">rec</span></label>
+      <label><input type="radio" name="amb" id="amb-3" value="louder (18 LU under)">Louder, 18 LU under</label>
+      <label><input type="radio" name="amb" id="amb-4" value="none, turn it off">None</label>
+    </div>
+  </div>
+
+  <div class="q" data-q="Storm bed">
+    <h3>The storm weather bed sits only 8.4 LU under the music</h3>
+    <p class="why">Louder than the rain you called too loud on 7 Sep. Unchanged so far.</p>
+    <div class="opts">
+      <label><input type="radio" name="storm" id="storm-y" value="bring it down to match rain">Bring it down <span class="rec">rec</span></label>
+      <label><input type="radio" name="storm" id="storm-n" value="leave it">Leave it</label>
+    </div>
+  </div>
+
+  <div class="q" data-q="Store lead image">
+    <h3>Which image leads the itch page?</h3>
+    <p class="why">Four candidates sent, all from .750. The uploads to itch stay yours.</p>
+    <div class="opts">
+      <label><input type="radio" name="lead" id="lead-a" value="A (re-shot storm battle)">A, storm</label>
+      <label><input type="radio" name="lead" id="lead-b" value="B (plain battle)">B, plain battle</label>
+      <label><input type="radio" name="lead" id="lead-c" value="C (lightning mid-strike)">C, bolt mid-strike <span class="rec">rec</span></label>
+      <label><input type="radio" name="lead" id="lead-d" value="D (after the strike, 1667)">D, after the strike</label>
+    </div>
+  </div>
+
+  <div class="q" data-q="Tempo Warden size">
+    <h3>World 1 masterite minibosses on the overworld: how big?</h3>
+    <p class="why">All four (Warden, Tempo, Arbiter, Curator) fill their 2×2 touch zone on purpose, about 1.33× the new 48 px party. One-line change either way.</p>
+    <div class="opts">
+      <label><input type="radio" name="warden" id="warden-big" value="keep them towering">Keep them towering</label>
+      <label><input type="radio" name="warden" id="warden-small" value="villager height">Villager height</label>
+    </div>
+  </div>
+
+  <div class="q" data-q="S-rank slam sound">
+    <h3>S-rank victory slam: placeholder now?</h3>
+    <p class="why">The game already picks a special slam for an S-rank one-shot. Only the sound file is missing, so it plays the moment one lands.</p>
+    <div class="opts">
+      <label><input type="radio" name="slam" id="slam-synth" value="local synth placeholder, labelled, replaced later">Synth placeholder now <span class="rec">rec</span></label>
+      <label><input type="radio" name="slam" id="slam-wait" value="wait for a proper render">Wait for a proper render</label>
+      <label><input type="radio" name="slam" id="slam-skip" value="skip, keep the ordinary slam">Skip, keep the ordinary slam</label>
+    </div>
+  </div>
+
+  <div class="q" data-q="Store page labels">
+    <h3>Village store shots show "Enter Library"-style labels</h3>
+    <div class="opts">
+      <label><input type="radio" name="labels" id="labels-k" value="keep, that's the game">Keep, that's the game</label>
+      <label><input type="radio" name="labels" id="labels-h" value="hide them for store shots">Hide for store shots</label>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Balance (cowir-autogrind's proposal)</h2>
+  <p class="note">Full table and evidence: <a href="https://claude.ai/artifact/8i94jpWn4xqF38XnkBGtaa" target="_blank" rel="noopener">Why Autobattle Crushes Everything</a>. Nothing changes until you rule.</p>
+
+  <div class="q" data-q="Undo x10 HP">
+    <h3>Undo the ×10 HP denomination (your 29 Jul ruling)?</h3>
+    <p class="why">Your target bands need it. It changes how numbers look, not difficulty.</p>
+    <div class="opts">
+      <label><input type="radio" name="hp" id="hp-y" value="yes, undo x10">Yes <span class="rec">rec</span></label>
+      <label><input type="radio" name="hp" id="hp-n" value="no, keep x10">No</label>
+    </div>
+  </div>
+
+  <div class="q" data-q="Over-level halving">
+    <h3>EXP halves for every N levels above the area. N =</h3>
+    <p class="why">At 3: +8 at your level costs 1.5–6.5 min; +16 farming W1 trash costs 7.5–34 h (today 1.3 min).</p>
+    <div class="opts">
+      <label><input type="radio" name="halve" id="halve-2" value="2">2, harsh</label>
+      <label><input type="radio" name="halve" id="halve-3" value="3">3 <span class="rec">rec</span></label>
+      <label><input type="radio" name="halve" id="halve-4" value="4">4, gentle</label>
+      <label><input type="radio" name="halve" id="halve-0" value="no halving">No halving</label>
+    </div>
+  </div>
+
+  <div class="q" data-q="Stomp bonus">
+    <h3>Should stomps still pay bonus EXP?</h3>
+    <p class="why">S-rank ×3 and autobattle ×1.5–3. Limiting them to fights at or above your level keeps the reward for clever automation, not for farming.</p>
+    <div class="opts">
+      <label><input type="radio" name="stomp" id="stomp-lim" value="only at or above the area's level">Only at or above level <span class="rec">rec</span></label>
+      <label><input type="radio" name="stomp" id="stomp-all" value="always">Always</label>
+      <label><input type="radio" name="stomp" id="stomp-off" value="never">Never</label>
+    </div>
+  </div>
+
+  <div class="q" data-q="Raise trash">
+    <h3>Raise ordinary enemies toward their world's bosses?</h3>
+    <p class="why">W2–W4 trash is level 3–8 after a level-20 Mordaine. The biggest single cause of "crushes everything".</p>
+    <div class="opts">
+      <label><input type="radio" name="trash" id="trash-y" value="yes">Yes <span class="rec">rec</span></label>
+      <label><input type="radio" name="trash" id="trash-n" value="no">No</label>
+    </div>
+  </div>
+
+  <div class="q" data-q="Reset rebalancer boosts">
+    <h3>Reset the rebalancer's boosts already in your saves?</h3>
+    <p class="why">It nudged EXP up and encounters down for entering villages and levelling up (fixed in .751). save_00/02/98/99: EXP ×1.15, encounters ×0.85. save_01: ×1.276 / ×0.625. save_50: ×1.340.</p>
+    <div class="opts">
+      <label><input type="radio" name="reset" id="reset-y" value="reset all to 1.0">Reset all to 1.0 <span class="rec">rec</span></label>
+      <label><input type="radio" name="reset" id="reset-cap" value="clamp the two over-cap saves only">Only the over-cap two</label>
+      <label><input type="radio" name="reset" id="reset-n" value="leave them">Leave them</label>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Chained encounters (cowir-overworld)</h2>
+  <div class="q" data-q="Chain shape">
+    <h3>When alerted monsters join, fight them how?</h3>
+    <div class="opts">
+      <label><input type="radio" name="chain" id="chain-1" value="one battle if they fit, else back-to-back">One battle if they fit, else back-to-back <span class="rec">rec</span></label>
+      <label><input type="radio" name="chain" id="chain-2" value="always back-to-back">Always back-to-back</label>
+      <label><input type="radio" name="chain" id="chain-3" value="always one bigger battle">Always one battle</label>
+    </div>
+  </div>
+  <div class="q" data-q="Chain victory screen">
+    <h3>Victory screen for a chain</h3>
+    <div class="opts">
+      <label><input type="radio" name="chainv" id="chainv-each" value="one per link">One per link <span class="rec">rec</span></label>
+      <label><input type="radio" name="chainv" id="chainv-sum" value="one summary at the end">One summary at the end</label>
+    </div>
+    <p class="why">Per link pays each win as it lands, so fleeing mid-chain keeps what you already won. The cost is one confirm per link.</p>
+  </div>
+  <div class="q" data-q="Chain counts">
+    <h3>Does chain length count monster groups or battles?</h3>
+    <div class="opts">
+      <label><input type="radio" name="chainc" id="chainc-g" value="groups (three groups in one battle still count)">Groups <span class="rec">rec</span></label>
+      <label><input type="radio" name="chainc" id="chainc-b" value="battles">Battles</label>
+    </div>
+  </div>
+  <div class="q" data-q="Chain rewards">
+    <h3>Chain reward scaling (G = groups engaged)</h3>
+    <p class="why">Whatever you pick here, the chain bonus will also be halved by the over-level rule in Balance, so chaining weak monsters can't become a new 2× farm.</p>
+    <div class="opts">
+      <label><input type="radio" name="chainr" id="chainr-prop" value="as proposed: EXP/gold +20% per group (cap 2x), drops +10% (cap 1.5x)">EXP/gold +20%/group, cap 2×; drops +10%, cap 1.5× <span class="rec">rec</span></label>
+      <label><input type="radio" name="chainr" id="chainr-mod" value="modest: +10% per group, cap +50%">Modest, +10%/group, cap +50%</label>
+      <label><input type="radio" name="chainr" id="chainr-big" value="big: +25% per group, cap 2x">Big, +25%/group, cap 2×</label>
+    </div>
+  </div>
+  <div class="q" data-q="Shop facades">
+    <h3>Give shop blocks the new house fronts too?</h3>
+    <div class="opts">
+      <label><input type="radio" name="shopf" id="shopf-y" value="yes">Yes</label>
+      <label><input type="radio" name="shopf" id="shopf-n" value="no, shops keep their stalls">No, shops keep their stalls</label>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Art and effects</h2>
+  <div class="q" data-q="Fractal FX">
+    <h3>Fractal magic FX (issue #399): wire it into spells, or iterate more?</h3>
+    <p class="why">cowir-battle sent clips; FractalFX shipped in .746 but nothing uses it yet.</p>
+    <div class="opts">
+      <label><input type="radio" name="fx" id="fx-wire" value="wire it into Fire first">Wire it into Fire first</label>
+      <label><input type="radio" name="fx" id="fx-iter" value="iterate on the clips first">Iterate on the clips first</label>
+    </div>
+  </div>
+  <div class="q" data-q="Backdrop videos">
+    <h3>Retire the cutscene backdrop videos (.ogv)?</h3>
+    <p class="why">They play before the still backdrop. cowir-sprites also has the backdrop style question and 10 face/body mismatches to show you.</p>
+    <div class="opts">
+      <label><input type="radio" name="ogv" id="ogv-y" value="retire them">Retire them <span class="rec">rec</span></label>
+      <label><input type="radio" name="ogv" id="ogv-n" value="keep them">Keep them</label>
+    </div>
+  </div>
+  <div class="q" data-q="Battle speed migration">
+    <h3>Everyone saved on 1× moved to the new 1.5× default</h3>
+    <p class="why">A deliberate 1× can't be told apart from the old default. Settings still offers 1×.</p>
+    <div class="opts">
+      <label><input type="radio" name="speed" id="speed-ok" value="fine as is">Fine as is</label>
+      <label><input type="radio" name="speed" id="speed-note" value="show a one-time note that speed changed">Show a one-time note</label>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Housekeeping</h2>
+  <div class="q" data-q="Character Creation">
+    <h3>Character Creation screen: nothing in the game opens it today</h3>
+    <p class="why">You ruled it should follow Text Size, but it's unreachable.</p>
+    <div class="opts">
+      <label><input type="radio" name="cc" id="cc-reach" value="make it reachable, then fix Text Size">Make it reachable first</label>
+      <label><input type="radio" name="cc" id="cc-fix" value="fix Text Size anyway">Fix it anyway</label>
+      <label><input type="radio" name="cc" id="cc-leave" value="leave it">Leave it <span class="rec">rec</span></label>
+    </div>
+  </div>
+  <div class="q" data-q="Pad mapping escape">
+    <h3>The full pad-mapping walk in Controls has no way out on the pad</h3>
+    <p class="why">On an unmapped pad, every press records a binding, so a pad-only player can't skip a step; only the keyboard can.</p>
+    <div class="opts">
+      <label><input type="radio" name="sdl" id="sdl-long" value="long-press a face button to skip">Long-press to skip <span class="rec">rec</span></label>
+      <label><input type="radio" name="sdl" id="sdl-res" value="reserve one button as the escape">Reserve an escape button</label>
+      <label><input type="radio" name="sdl" id="sdl-kb" value="keyboard-only, captioned">Keyboard-only, say so</label>
+    </div>
+  </div>
+
+  <div class="q" data-q="Release ops">
+    <h3>Remember: release ops (tag, re-tag, re-publish) are reversible; don't wait on me</h3>
+    <p class="why">Relayed via grokbot; I need it from you directly to save it.</p>
+    <div class="opts">
+      <label><input type="radio" name="relops" id="relops-y" value="yes, remember it">Yes, remember it</label>
+      <label><input type="radio" name="relops" id="relops-n" value="no">No</label>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="bar"><div class="in">
+  <span class="tally" id="tally">0 picked</span>
+  <button type="button" id="copy">Copy my answers</button>
+  <span class="note" id="msg"></span>
+  <textarea id="out" rows="3" readonly hidden></textarea>
+</div></div>
+
+<script>
+(function(){
+  var KEY='cowir-open-calls';
+  var radios=[].slice.call(document.querySelectorAll('.q input[type=radio]'));
+  function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');radios.forEach(function(r){if(s[r.name]===r.value)r.checked=true;});}catch(e){}}
+  function save(){try{var s={};radios.forEach(function(r){if(r.checked)s[r.name]=r.value;});localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}}
+  function text(){
+    var lines=[];
+    document.querySelectorAll('.q').forEach(function(q){var c=q.querySelector('input:checked');if(c)lines.push(q.dataset.q+': '+c.value);});
+    return lines.length?'My calls:\n'+lines.join('\n'):'';
+  }
+  function tally(){var n=document.querySelectorAll('.q input:checked').length,t=document.querySelectorAll('.q').length;document.getElementById('tally').textContent=n+' of '+t+' picked';}
+  radios.forEach(function(r){r.addEventListener('change',function(){save();tally();});});
+  document.getElementById('copy').addEventListener('click',function(){
+    var t=text(),out=document.getElementById('out'),msg=document.getElementById('msg');
+    if(!t){msg.textContent='Pick at least one first.';return;}
+    out.value=t;
+    var fallback=function(){out.hidden=false;out.focus();out.select();msg.textContent='Select and copy the text below.';};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){msg.textContent='Copied. Paste it to Claude.';},fallback);}else{fallback();}
+  });
+  load();tally();
+})();
+</script>
